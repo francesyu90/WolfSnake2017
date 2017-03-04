@@ -37,6 +37,7 @@ def chooseFood(data, self):
 
 
 
+'''
 def removeBadDirections(ourSnake):
 	safeDirections = ["up","down","left","right"]
 	riskDirections = []
@@ -109,7 +110,6 @@ def removeBadDirections(ourSnake):
 		
 	return [safeDirections,riskDirections]
 	
-'''
 def mapValue(xCord,yCord):
 	width = len(map[0])
 	height = len(map)
@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!45",
+		'taunt': "Good luck, my friends!AWRGYUKHUJOK",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
