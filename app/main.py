@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!cccc",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -218,16 +218,7 @@ def move():
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
-	stng = ""'''
-	for i in mv:
-		stng += i
-		stng += " "
 	
-	return {
-		'move': mv[0],
-		'taunt': stng
-	}
-	'''
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
@@ -235,8 +226,6 @@ def move():
 	else:
 		#move to closest food
 		#find closest food
-		
-
 		direction = shortestPath(mv, chooseFood(data, self), self)
 		#end of hungry
 	
@@ -250,15 +239,10 @@ def move():
 		tnt=tnta[t]
 	if data['turn'] < 4:
 		tnt = "Good luck, my friends!"
-	
-	stng = ""
-	for i in mv:
-		stng += i
-		stng += " "
-	
+		
 	return {
 		'move': direction,
-		'taunt': stng
+		'taunt': tnt
 	}
 
 # Expose WSGI app (so gunicorn can find it)
