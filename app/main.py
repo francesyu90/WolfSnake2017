@@ -184,6 +184,16 @@ def move():
 	#temporary, combine the two lists
 	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	
+	stng = ""
+	for i in mv:
+		stng += i
+		stng += " "
+	
+	return {
+		'move': mv[0],
+		'taunt': stng
+	}
+	
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
