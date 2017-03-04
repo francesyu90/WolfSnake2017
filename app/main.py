@@ -3,7 +3,7 @@ import os
 import random
 
 map=[[]]
-'''
+
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
 	vd1=pellet[1]-snake["coords"][0][1]
@@ -37,7 +37,6 @@ def chooseFood(data, self):
 
 
 
-'''
 def removeBadDirections(ourSnake):
 	safeDirections = ["up","down","left","right"]
 	riskDirections = []
@@ -183,7 +182,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!AWRGYUKHUJOK",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
