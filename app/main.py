@@ -109,6 +109,7 @@ def removeBadDirections(ourSnake):
 		
 	return [safeDirections,riskDirections]
 	
+'''
 def mapValue(xCord,yCord):
 	width = len(map[0])
 	height = len(map)
@@ -141,7 +142,6 @@ def generateMap(data):
 		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
 			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 
-'''
 def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!fd",
+		'taunt': "Good luck, my friends!45",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
