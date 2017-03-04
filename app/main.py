@@ -141,6 +141,7 @@ def generateMap(data):
 		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
 			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 
+'''
 def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
@@ -160,7 +161,6 @@ def shortestPath(moves, goal, self):
 		elif goal[0] > self["coords"][0][0] and 'right' in moves:
 			d='right'
 	return d
-'''
 		
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!",
+		'taunt': "Good luck, my friends!fd",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
