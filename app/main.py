@@ -2,7 +2,22 @@ import bottle
 import os
 import random
 
+map=[[]]
 
+def generateMap(data):
+	# might be nice to store the snake length in the head, and the local proximity to food in the tail
+	map = [[]]*data["height"]
+	for row in map:
+		row = [""]*data["width"]
+		
+	for pellet in data["food"]:
+		map[pellet[0]][pellet[1]] = "food"
+		
+	for snake in data["snakes"]:
+		for coord in snake["coords"]
+			map[coord[0]][coord[1]] = "body"
+		map[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
+		map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -25,7 +40,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "YOU'RE GOING UP!",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -38,24 +53,67 @@ def start():
 def move():
 	data = bottle.request.json
 	
-	#testing code
+'''	#testing code
 	d = ['up','down','left','right']
 	r = random.randint(0,3)
 	return {
 		'move': d[r],
 		'taunt': d[r]
 	}
-	
+'''	
 	#find self
-	for wolf in data["snakes"]:
-		if wolf["id"]=="afdccc0a-2f55-4092-b5b7-b65ab9a30b1e":
-			self=wolf
+	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
+	
+	#eliminate impossible directions & choose random default move
+	# step 1 - build game map
+	generateMap(data)
+	
+	#safe places to move:
+	#  any empty space without a head nearby
+	#  any tail that has a head not beside food
+	#  any empty space that has a head beside it with a smaller ize than our snake
+	
+	if(self["health_points"] > threshold):
+	#pick best remaining move
+		
+	else:
+	#move to closest food
+		if not data["food"]:
+			return{
+				'move': mv[r],
+				'taunt':tnt
+			}
+
+		 #find closest food
+		closest_food=data["food"][0]
+		td0=10,000
+		for pellet in data["food"]:
+			hd1=pellet[0]-self["coords"][0][0]
+			vd1=pellet[1]-self["coords"][0][1]
+			td1=((hd1*hd1)+(vd1*vd1))
+			if td1<td0:
+				closest_food=pellet
+				td0=td1
+
+		#set default movement
+		if 'up' in mv: direction = 'up'
+		elif 'right' in mv: direction = 'right'
+		elif 'down' in mv: direction = 'down'
+		elif 'left' in mv: direction = 'left'
+		
+		#take shortest path to food
+		if closest_food[0]<self["coords"][0][0] and 'left' in mv:
+			direction='left'
+		elif closest_food[0]>self["coords"][0][0] and 'right' in mv:
+			direction='right'
+		elif closest_food[1]>self["coords"][0][1] and 'down' in mv:
+			direction='down'
+		#end of hungry
 
 	# TODO: Do things with datax
-	r=random.randint(0,3)
 	mv=['up','right','down','left']
 	for snake in data['snakes']:
 		for square in snake['coords']:
@@ -69,15 +127,6 @@ def move():
 			elif square[0]==self["coords"][0][0] and square[1]-1==self['coords'][0][1]:#neck is down of head
 				mv.remove('down')
 	
-	if data['turn']%4==0:
-		tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We'll all be dead eventually :)"],
-			["I'm a loversnake, not a battlesnake <3"],["Battlesnakes? More like PARTYsnakes!"],["Thank you to the sponsors!"],
-			[":D"],["Everyone here is so clever..."],["Golly!"],["What pretty snakes we have here today!"],["I should have prepared for this ahead of time..."],
-			["Good job everybody!"]]
-		t=random.randint(0,t.length)
-		tnt=tnta[t]
-	if data['turn'] < 4:
-		tnt = "Good luck, my friends!"
 		
 	if self['coords'][0][0]==0:
 		mv.remove('left')
@@ -88,35 +137,17 @@ def move():
 	elif self['coords'][0][1]==data["height"]-1:
 		mv.remove('down')
 					
-	if not data["food"]:
-		return{
-			'move': mv[r],
-			'taunt':tnt
-		}
-
-	 #find closest food
-	closest_food=data["food"][0]
-	td0=10,000
-	for pellet in data["food"]:
-		hd1=pellet[0]-self["coords"][0][0]
-		vd1=pellet[1]-self["coords"][0][1]
-		td1=((hd1*hd1)+(vd1*vd1))
-		if td1<td0:
-			closest_food=pellet
-			td0=td1
-
-	if 'up' in mv: direction = 'up'
-	elif 'right' in mv: direction = 'right'
-	elif 'down' in mv: direction = 'down'
-	elif 'left' in mv: direction = 'left'
 	
-	if closest_food[0]<self["coords"][0][0] and 'left' in mv:
-		direction='left'
-	elif closest_food[0]>self["coords"][0][0] and 'right' in mv:
-		direction='right'
-	elif closest_food[1]>self["coords"][0][1] and 'down' in mv:
-		direction='down'
-
+	#set taunt
+	if data['turn']%4==0:
+		tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We'll all be dead eventually :)"],
+			["I'm a loversnake, not a battlesnake <3"],["Battlesnakes? More like PARTYsnakes!"],["Thank you to the sponsors!"],
+			[":D"],["Everyone here is so clever..."],["Golly!"],["What pretty snakes we have here today!"],["I should have prepared for this ahead of time..."],
+			["Good job everybody!"]]
+		t=random.randint(0,len(tnta))
+		tnt=tnta[t]
+	if data['turn'] < 4:
+		tnt = "Good luck, my friends!"
 
 	return {
 		'move': direction,
