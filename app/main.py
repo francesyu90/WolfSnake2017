@@ -33,8 +33,13 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    
 	
+	d=['up','down','left','right']
+	r = random.randint(0,3)
+    return {
+        'move': d[r],
+        'taunt': d[r]
+    }
 	
     #find self
     for wolf in data["snakes"]:
