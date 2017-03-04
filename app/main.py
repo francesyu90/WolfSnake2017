@@ -53,6 +53,22 @@ def generateMap(data):
 		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
 			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 
+def shortestPath(moves, goal, self):
+	#set default movement
+	if 'up' in moves: d = 'up'
+	elif 'right' in moves: d = 'right'
+	elif 'down' in moves: d = 'down'
+	elif 'left' in moves: d = 'left'
+	
+	#take shortest path to food
+	if goal[0]<self["coords"][0][0] and 'left' in moves:
+		d='left'
+	elif goal[0]>self["coords"][0][0] and 'right' in moves:
+		d='right'
+	elif goal[1]>self["coords"][0][1] and 'down' in moves:
+		d='down'
+	return d
+		
 @bottle.route('/static/<path:path>')
 def static(path):
 	return bottle.static_file(path, root='static/')
@@ -108,18 +124,18 @@ def move():
 	
 	
 	if(self["health_points"] > threshold):
-		#pick best remaining move
-		pass
+		#move to tail
+		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
 		#move to closest food
 		if not data["food"]:
 			return{
-				'move': mv[r],
+				'move': mv[r], #THIS HAS TO CHANGE
 				'taunt':tnt
 			}
 
-		 #find closest food
+		#find closest food
 		closest_food=data["food"][0]
 		td0=10,000
 		for pellet in data["food"]:
@@ -130,19 +146,7 @@ def move():
 				closest_food=pellet
 				td0=td1
 
-		#set default movement
-		if 'up' in mv: direction = 'up'
-		elif 'right' in mv: direction = 'right'
-		elif 'down' in mv: direction = 'down'
-		elif 'left' in mv: direction = 'left'
-		
-		#take shortest path to food
-		if closest_food[0]<self["coords"][0][0] and 'left' in mv:
-			direction='left'
-		elif closest_food[0]>self["coords"][0][0] and 'right' in mv:
-			direction='right'
-		elif closest_food[1]>self["coords"][0][1] and 'down' in mv:
-			direction='down'
+		direction = shortestPath(mv, pellet, self)
 		#end of hungry
 
 	# TODO: Do things with datax
