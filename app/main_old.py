@@ -2,31 +2,33 @@ import bottle
 import os
 import random
 
-
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
 
 
+@bottle.get('/')
+def index():
+    head_url = 'http://wallpapersinhq.pw/images/big/scarface-148756.jpg' 
+    #'%s://%s/static/head.png' % (
+     #   bottle.request.urlparts.scheme,
+      #  bottle.request.urlparts.netloc
+    #)
+
+    return {
+        'color': '#000048',
+        'head': head_url
+    }
+
+
 @bottle.post('/start')
 def start():
     data = bottle.request.json
-    game_id = data['game_id']
-    board_width = data['width']
-    board_height = data['height']
-
-    head_url = '%s://%s/static/head.png' % (
-        bottle.request.urlparts.scheme,
-        bottle.request.urlparts.netloc
-    )
 
     # TODO: Do things with data
 
     return {
-        'color': '#00FF00',
-        'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
-        'head_url': head_url,
-        'name': 'battlesnake-python'
+        'taunt': "I'm hangry!"
     }
 
 
@@ -104,6 +106,18 @@ def move():
         'move': direction,
         'taunt': tnt
     }
+
+
+@bottle.post('/end')
+def end():
+    data = bottle.request.json
+
+    # TODO: Do things with data
+
+    return {
+        'taunt': "It's all over!"
+    }
+
 
 # Expose WSGI app (so gunicorn can find it)
 application = bottle.default_app()
