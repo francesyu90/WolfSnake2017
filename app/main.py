@@ -14,11 +14,11 @@ def removeBadDirections(ourSnake):
 	### DANGER: invalid coordinate (wall) and another snake's body
 	if (mapValue(head[0]+1,head[1]) == "invalid") or (mapValue(head[0]+1,head[1]) == "body") or (mapValue(head[0]+1,head[1]) == "head"):
 		directions.remove("right")
-	if (mapValue(head[0]-1,head[1]) == "invalid") or (mapValue(head[0]-1,head[1]) == "body") or (mapValue(head[0]-1,head[1]) == "head")::
+	if (mapValue(head[0]-1,head[1]) == "invalid") or (mapValue(head[0]-1,head[1]) == "body") or (mapValue(head[0]-1,head[1]) == "head"):
 		directions.remove("left")
-	if (mapValue(head[0],head[1]-1) == "invalid") or (mapValue(head[0],head[1]-1) == "body") or (mapValue(head[0],head[1]-1) == "head")::
+	if (mapValue(head[0],head[1]-1) == "invalid") or (mapValue(head[0],head[1]-1) == "body") or (mapValue(head[0],head[1]-1) == "head"):
 		directions.remove("up")
-	if (mapValue(head[0],head[1]+1) == "invalid") or (mapValue(head[0],head[1]+1) == "body") or (mapValue(head[0],head[1]+1) == "head")::
+	if (mapValue(head[0],head[1]+1) == "invalid") or (mapValue(head[0],head[1]+1) == "body") or (mapValue(head[0],head[1]+1) == "head"):
 		directions.remove("down")
 	
 def mapValue(xCord,yCord):
@@ -123,7 +123,7 @@ def move():
 	directions = removeBadDirections(self)
 	
 	
-	if(self["health_points"] > threshold || not data["food"]):
+	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
