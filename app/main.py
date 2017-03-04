@@ -3,6 +3,7 @@ import os
 import random
 
 
+
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -34,9 +35,13 @@ def start():
 def move():
     data = bottle.request.json
     
+    return {
+        'move': direction,
+        'taunt': direction
+    }
     #find self
     for wolf in data["snakes"]:
-        if wolf["id"]=="afdccc0a-2f55-4092-b5b7-b65ab9a30b1e":
+        if wolf["id"]==data["you"]:
             self=wolf
     
 
