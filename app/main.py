@@ -56,9 +56,9 @@ def move():
             elif square[0]==self["coords"][0][0] and square[1]-1==self['coords'][0][1]:#neck is south of head
                 mv.remove('south')
     
-    if data['turn']%5==0:
-        t=random.randint(0,7)
-        tnta=[["You're going up!"],['Baaaaa'],['You look in a mirror. You see me'],['haHAAAA!'],['What is looove?'],["Baby don't hurt meeeee"],['Predicting your loss is easy'],['I will never truly die']]
+    if data['turn']%4==0:
+        tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We're all winners :)"],["I'm a loversnake, not a battlesnake <3"]]
+        t=random.randint(0,t.length)
         tnt=tnta[t]
         
     if self['coords'][0][0]==0:
