@@ -26,7 +26,7 @@ def start():
         'color': '#00FF00',
         'taunt': '{} ({}x{})'.format(game_id, board_width, board_height),
         'head_url': head_url,
-        'name': 'battlesnake-python'
+        'name': 'Nice_Snake'
     }
 
 
@@ -34,12 +34,15 @@ def start():
 def move():
     data = bottle.request.json
     
+	
+	
     #find self
     for wolf in data["snakes"]:
         if wolf["id"]=="afdccc0a-2f55-4092-b5b7-b65ab9a30b1e":
             self=wolf
     
-
+	#threshold between avoidance strategy and seeking food
+	food_threshold = 50
 
     # TODO: Do things with datax
     r=random.randint(0,3)
@@ -57,9 +60,14 @@ def move():
                 mv.remove('south')
     
     if data['turn']%4==0:
-        tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We're all winners :)"],["I'm a loversnake, not a battlesnake <3"]]
+        tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We'll all be dead eventually :)"],
+			["I'm a loversnake, not a battlesnake <3"],["Battlesnakes? More like PARTYsnakes!"],["Thank you to the sponsors!"],
+			[":D"],["Everyone here is so clever..."],["Golly!"],["What pretty snakes we have here today!"],["I should have prepared for this ahead of time..."],
+			["Good job everybody!"]]
         t=random.randint(0,t.length)
         tnt=tnta[t]
+	if data['turn'] < 4:
+		tnt = "Good luck, my friends!"
         
     if self['coords'][0][0]==0:
         mv.remove('west')
