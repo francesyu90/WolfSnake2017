@@ -4,6 +4,30 @@ import random
 
 map=[[]]
 
+def removeBadDirections(ourSnake):
+	directions = ["up","down","left","right"]
+	#safe places to move:
+	#  any empty space without a head nearby
+	#  any tail that has a head not beside food
+	#  any empty space that has a head beside it with a smaller ize than our snake
+	head = ourSnake["coords"][0]
+	### DANGER: invalid coordinate (wall) and another snake's body
+	if (mapValue(head[0]+1,head[1]) == "invalid") or (mapValue(head[0]+1,head[1]) == "body") or (mapValue(head[0]+1,head[1]) == "head"):
+		directions.remove("right")
+	if (mapValue(head[0]-1,head[1]) == "invalid") or (mapValue(head[0]-1,head[1]) == "body") or (mapValue(head[0]-1,head[1]) == "head")::
+		directions.remove("left")
+	if (mapValue(head[0],head[1]-1) == "invalid") or (mapValue(head[0],head[1]-1) == "body") or (mapValue(head[0],head[1]-1) == "head")::
+		directions.remove("up")
+	if (mapValue(head[0],head[1]+1) == "invalid") or (mapValue(head[0],head[1]+1) == "body") or (mapValue(head[0],head[1]+1) == "head")::
+		directions.remove("down")
+	
+def mapValue(xCord,yCord):
+	width = len(map[0])
+	height = len(map)
+	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
+		return "invalid"
+	return map[xCord][yCord]
+
 def generateMap(data):
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
 	map = [[]]*data["height"]
@@ -16,8 +40,18 @@ def generateMap(data):
 	for snake in data["snakes"]:
 		for coord in snake["coords"]:
 			map[coord[0]][coord[1]] = "body"
+		# store the body of the snake
 		map[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
 		map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
+		# mark a snake as dangerous
+		if mapValue(snake["coords"][0][0]+1,snake["coords"][0][1])=="food":
+			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif mapValue(snake["coords"][0][0]-1,snake["coords"][0][1])=="food":
+			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]+1)=="food":
+			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
+			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -70,11 +104,8 @@ def move():
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game map
 	generateMap(data)
+	directions = removeBadDirections(self)
 	
-	#safe places to move:
-	#  any empty space without a head nearby
-	#  any tail that has a head not beside food
-	#  any empty space that has a head beside it with a smaller ize than our snake
 	
 	if(self["health_points"] > threshold):
 		#pick best remaining move
