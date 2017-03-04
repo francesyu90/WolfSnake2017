@@ -123,18 +123,12 @@ def move():
 	directions = removeBadDirections(self)
 	
 	
-	if(self["health_points"] > threshold):
+	if(self["health_points"] > threshold || not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
 		#move to closest food
-		if not data["food"]:
-			return{
-				'move': mv[r], #THIS HAS TO CHANGE
-				'taunt':tnt
-			}
-
 		#find closest food
 		closest_food=data["food"][0]
 		td0=10,000
@@ -148,31 +142,6 @@ def move():
 
 		direction = shortestPath(mv, pellet, self)
 		#end of hungry
-
-	# TODO: Do things with datax
-	mv=['up','right','down','left']
-	for snake in data['snakes']:
-		for square in snake['coords']:
-			if square[1]==self['coords'][0][1]:#neck is not above or below head
-				if square[0]+1==self['coords'][0][0]:#neck is left of head
-					mv.remove('left')
-				elif square[0]-1==self['coords'][0][0]:#neck is right of head
-					mv.remove('right')
-			elif square[0]==self["coords"][0][0] and square[1]+1==self['coords'][0][1]:#neck is up of head
-				mv.remove('up')
-			elif square[0]==self["coords"][0][0] and square[1]-1==self['coords'][0][1]:#neck is down of head
-				mv.remove('down')
-	
-		
-	if self['coords'][0][0]==0:
-		mv.remove('left')
-	elif self['coords'][0][0]==data["width"]-1:
-		mv.remove('right')
-	elif self['coords'][0][1]==0:
-		mv.remove('up')
-	elif self['coords'][0][1]==data["height"]-1:
-		mv.remove('down')
-					
 	
 	#set taunt
 	if data['turn']%4==0:
