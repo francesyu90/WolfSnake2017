@@ -4,6 +4,39 @@ import random
 
 map=[[]]
 
+def calculateDistanceToFood(snake, pellet):
+	hd1=pellet[0]-snake["coords"][0][0]
+	vd1=pellet[1]-snake["coords"][0][1]
+	td1=((hd1*hd1)+(vd1*vd1))
+	return td1
+
+
+def chooseFood(data, self): 
+	for pellet in data["food"]:
+		closest_snake = self
+		td0=calculateDistanceToFood(self, pellet)
+		for snake in data["snakes"]:
+			td1=calculateDistanceToFood(snake, pellet)
+			if td1<td0:
+				closest_snake = snake
+				td0=td1
+		if closest_snake == self:
+			return pellet
+
+	closest_food=data["food"][0]
+	td0=10,000
+	for pellet in data["food"]:
+		hd1=pellet[0]-self["coords"][0][0]
+		vd1=pellet[1]-self["coords"][0][1]
+		td1=((hd1*hd1)+(vd1*vd1))
+		if td1<td0:
+			closest_food=pellet
+			td0=td1
+	return closest_food
+
+
+
+
 def removeBadDirections(ourSnake):
 	safeDirections = ["up","down","left","right"]
 	riskDirections = []
@@ -201,17 +234,9 @@ def move():
 	else:
 		#move to closest food
 		#find closest food
-		closest_food=data["food"][0]
-		td0=10,000
-		for pellet in data["food"]:
-			hd1=pellet[0]-self["coords"][0][0]
-			vd1=pellet[1]-self["coords"][0][1]
-			td1=((hd1*hd1)+(vd1*vd1))
-			if td1<td0:
-				closest_food=pellet
-				td0=td1
+		
 
-		direction = shortestPath(mv, pellet, self)
+		direction = shortestPath(mv, chooseFood(data, self), self)
 		#end of hungry
 	
 	#set taunt
