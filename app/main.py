@@ -129,6 +129,7 @@ def generateMap(data):
 		for coord in snake["coords"]:
 			map[coord[0]][coord[1]] = "body"
 		# store the body of the snake
+		'''
 		map[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
 		map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
 		# mark a snake as dangerous
@@ -140,7 +141,7 @@ def generateMap(data):
 			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
 			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
-
+		'''
 def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
@@ -182,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!ee",
+		'taunt': "Good luck, my friends!ddd",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
