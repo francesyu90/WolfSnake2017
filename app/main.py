@@ -55,19 +55,24 @@ def generateMap(data):
 
 def shortestPath(moves, goal, self):
 	#set default movement
-	if 'up' in moves: d = 'up'
-	elif 'right' in moves: d = 'right'
-	elif 'down' in moves: d = 'down'
-	elif 'left' in moves: d = 'left'
+	r = random.randint(0,len(moves))
+	d = moves[r]
 	
-	#take shortest path to food
-	if goal[0]<self["coords"][0][0] and 'left' in moves:
-		d='left'
-	elif goal[0]>self["coords"][0][0] and 'right' in moves:
-		d='right'
-	elif goal[1]>self["coords"][0][1] and 'down' in moves:
-		d='down'
+	#see if further horizontally or vertically
+	if(abs(goal[0]-self["coords"][0][0]) < abs(goal[1]-self["coords"][0][1])):
+		#move vertically
+		if goal[1] > self["coords"][0][1] and 'down' in moves:
+			d='down'
+		elif goal[1] < self["coords"][0][1] and 'up' in moves:
+			d='up'
+	else:
+		#move horizontally
+		if goal[0] < self["coords"][0][0] and 'left' in moves:
+			d='left'
+		elif goal[0] > self["coords"][0][0] and 'right' in moves:
+			d='right'
 	return d
+	
 		
 @bottle.route('/static/<path:path>')
 def static(path):
