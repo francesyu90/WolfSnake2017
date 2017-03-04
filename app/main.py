@@ -3,7 +3,7 @@ import os
 import random
 
 map=[[]]
-
+'''
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
 	vd1=pellet[1]-snake["coords"][0][1]
@@ -160,7 +160,7 @@ def shortestPath(moves, goal, self):
 		elif goal[0] > self["coords"][0][0] and 'right' in moves:
 			d='right'
 	return d
-	
+'''
 		
 @bottle.route('/static/<path:path>')
 def static(path):
