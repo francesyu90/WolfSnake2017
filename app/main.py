@@ -2,7 +2,7 @@ import bottle
 import os
 import random
 
-map=[[]]
+gameMap=[[]]
 
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
@@ -47,12 +47,12 @@ def removeBadDirections(ourSnake):
 	head = ourSnake["coords"][0]
 	### DANGER: invalid coordinate (wall) and another snake's body
 	
-	temp = mapValue(head[0]+1,head[1])
+	temp = gameMapValue(head[0]+1,head[1])
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("right")
 	if (temp == "tail danger"):
 		riskDirections.add("right")
-	local = [mapValue(head[0]+2,head[1]),mapValue(head[0]+1,head[1]-1),mapValue(head[0]+1,head[1]+1)]
+	local = [gameMapValue(head[0]+2,head[1]),gameMapValue(head[0]+1,head[1]-1),gameMapValue(head[0]+1,head[1]+1)]
 	localHeads = [x for x in local if x[:4] == "head"]
 	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
 	if localDanger:
@@ -62,12 +62,12 @@ def removeBadDirections(ourSnake):
 			riskDirections.add("right")
 			
 			
-	temp = mapValue(head[0]-1,head[1])
+	temp = gameMapValue(head[0]-1,head[1])
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("left")
 	if (temp == "tail danger"):
 		riskDirections.add("left")
-	local = [mapValue(head[0]-2,head[1]),mapValue(head[0]-1,head[1]-1),mapValue(head[0]-1,head[1]+1)]
+	local = [gameMapValue(head[0]-2,head[1]),gameMapValue(head[0]-1,head[1]-1),gameMapValue(head[0]-1,head[1]+1)]
 	localHeads = [x for x in local if x[:4] == "head"]
 	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
 	if localDanger:
@@ -77,12 +77,12 @@ def removeBadDirections(ourSnake):
 			riskDirections.add("left")
 			
 		
-	temp = mapValue(head[0],head[1]-1)
+	temp = gameMapValue(head[0],head[1]-1)
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("up")
 	if (temp == "tail danger"):
 		riskDirections.add("up")
-	local = [mapValue(head[0],head[1]-2),mapValue(head[0]-1,head[1]-1),mapValue(head[0]+1,head[1]-1)]
+	local = [gameMapValue(head[0],head[1]-2),gameMapValue(head[0]-1,head[1]-1),gameMapValue(head[0]+1,head[1]-1)]
 	localHeads = [x for x in local if x[:4] == "head"]
 	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
 	if localDanger:
@@ -92,12 +92,12 @@ def removeBadDirections(ourSnake):
 			riskDirections.add("up")
 			
 		
-	temp = mapValue(head[0],head[1]+1)
+	temp = gameMapValue(head[0],head[1]+1)
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("down")
 	if (temp == "tail danger"):
 		riskDirections.add("down")
-	local = [mapValue(head[0],head[1]+2),mapValue(head[0]-1,head[1]+1),mapValue(head[0]+1,head[1]+1)]
+	local = [gameMapValue(head[0],head[1]+2),gameMapValue(head[0]-1,head[1]+1),gameMapValue(head[0]+1,head[1]+1)]
 	localHeads = [x for x in local if x[:4] == "head"]
 	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
 	if localDanger:
@@ -109,38 +109,38 @@ def removeBadDirections(ourSnake):
 		
 	return [safeDirections,riskDirections]
 	
-def mapValue(xCord,yCord):
-	width = len(map[0])
-	height = len(map)
+def gameMapValue(xCord,yCord):
+	width = len(gameMap[0])
+	height = len(gameMap)
 	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
 		return "invalid"
-	return map[xCord][yCord]
+	return gameMap[xCord][yCord]
 
-def generateMap(data):
+def generategameMap(data):
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
-	map = [[]]*data["height"]
-	for row in map:
+	gameMap = [[]]*data["height"]
+	for row in gameMap:
 		row = [""]*data["width"]
 		
 	for pellet in data["food"]:
-		map[pellet[0]][pellet[1]] = "food"
+		gameMap[pellet[0]][pellet[1]] = "food"
 		
 	for snake in data["snakes"]:
 		for coord in snake["coords"]:
-			map[coord[0]][coord[1]] = "body"
+			gameMap[coord[0]][coord[1]] = "body"
 		# store the body of the snake
 		'''
-		map[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
-		map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
+		gameMap[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
+		gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
 		# mark a snake as dangerous
-		if mapValue(snake["coords"][0][0]+1,snake["coords"][0][1])=="food":
-			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
-		elif mapValue(snake["coords"][0][0]-1,snake["coords"][0][1])=="food":
-			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
-		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]+1)=="food":
-			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
-		elif mapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
-			map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		if gameMapValue(snake["coords"][0][0]+1,snake["coords"][0][1])=="food":
+			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif gameMapValue(snake["coords"][0][0]-1,snake["coords"][0][1])=="food":
+			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif gameMapValue(snake["coords"][0][0],snake["coords"][0][1]+1)=="food":
+			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
+		elif gameMapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
+			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 		'''
 def shortestPath(moves, goal, self):
 	#set default movement
@@ -211,8 +211,8 @@ def move():
 	food_threshold = 50
 	
 	#eliminate impossible directions & choose random default move
-	# step 1 - build game map
-	generateMap(data)
+	# step 1 - build game gameMap
+	generategameMap(data)
 #	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
