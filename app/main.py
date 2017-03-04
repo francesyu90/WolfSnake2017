@@ -212,7 +212,7 @@ def move():
 	
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game map
-	generateMap(data)
+#	generateMap(data)
 #	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
