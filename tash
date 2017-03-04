@@ -1,0 +1,40 @@
+[1mdiff --git a/app/main.py b/app/main.py[m
+[1mindex 00cf7e6..2216674 100755[m
+[1m--- a/app/main.py[m
+[1m+++ b/app/main.py[m
+[36m@@ -12,13 +12,14 @@[m [mdef removeBadDirections(ourSnake):[m
+ 	#  any empty space that has a head beside it with a smaller ize than our snake[m
+ 	head = ourSnake["coords"][0][m
+ 	### DANGER: invalid coordinate (wall) and another snake's body[m
+[32m+[m
+ 	if (mapValue(head[0]+1,head[1]) == "invalid") or (mapValue(head[0]+1,head[1]) == "body") or (mapValue(head[0]+1,head[1]) == "head"):[m
+ 		directions.remove("right")[m
+[31m-	if (mapValue(head[0]-1,head[1]) == "invalid") or (mapValue(head[0]-1,head[1]) == "body") or (mapValue(head[0]-1,head[1]) == "head")::[m
+[32m+[m	[32mif (mapValue(head[0]-1,head[1]) == "invalid") or (mapValue(head[0]-1,head[1]) == "body") or (mapValue(head[0]-1,head[1]) == "head"):[m
+ 		directions.remove("left")[m
+[31m-	if (mapValue(head[0],head[1]-1) == "invalid") or (mapValue(head[0],head[1]-1) == "body") or (mapValue(head[0],head[1]-1) == "head")::[m
+[32m+[m	[32mif (mapValue(head[0],head[1]-1) == "invalid") or (mapValue(head[0],head[1]-1) == "body") or (mapValue(head[0],head[1]-1) == "head"):[m
+ 		directions.remove("up")[m
+[31m-	if (mapValue(head[0],head[1]+1) == "invalid") or (mapValue(head[0],head[1]+1) == "body") or (mapValue(head[0],head[1]+1) == "head")::[m
+[32m+[m	[32mif (mapValue(head[0],head[1]+1) == "invalid") or (mapValue(head[0],head[1]+1) == "body") or (mapValue(head[0],head[1]+1) == "head"):[m
+ 		directions.remove("down")[m
+ 	[m
+ def mapValue(xCord,yCord):[m
+[36m@@ -163,16 +164,7 @@[m [mdef move():[m
+ 			elif square[0]==self["coords"][0][0] and square[1]-1==self['coords'][0][1]:#neck is down of head[m
+ 				mv.remove('down')[m
+ 	[m
+[31m-		[m
+[31m-	if self['coords'][0][0]==0:[m
+[31m-		mv.remove('left')[m
+[31m-	elif self['coords'][0][0]==data["width"]-1:[m
+[31m-		mv.remove('right')[m
+[31m-	elif self['coords'][0][1]==0:[m
+[31m-		mv.remove('up')[m
+[31m-	elif self['coords'][0][1]==data["height"]-1:[m
+[31m-		mv.remove('down')[m
+[31m-					[m
+[32m+[m[41m			[m
+ 	[m
+ 	#set taunt[m
+ 	if data['turn']%4==0:[m
