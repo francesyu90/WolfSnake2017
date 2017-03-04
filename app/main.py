@@ -120,8 +120,8 @@ def generategameMap(data):
 	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
 	gameMap = [[]]*data["height"]
-	for row in gameMap:
-		row = [""]*data["width"]
+	for row in range(len(gameMap)):
+		gameMap[row] = [""]*data["width"]
 		
 	for pellet in data["food"]:
 		gameMap[pellet[0]][pellet[1]] = "food"
@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!bbb",
+		'taunt': "Good luck, my friends!aaaaaaa",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
