@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!cccc",
+		'taunt': "Good luck, my friends!bbb",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -223,8 +223,8 @@ def move():
 		stng += " "
 	
 	return {
-		'move': mv[0],
-		'taunt': stng
+		'move': mv[2],
+		'taunt': "AHHH"
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
