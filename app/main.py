@@ -146,7 +146,7 @@ def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
 	d = moves[r]
-	
+	return d	#test
 	#see if further horizontally or vertically
 	if(abs(goal[0]-self["coords"][0][0]) < abs(goal[1]-self["coords"][0][1])):
 		#move vertically
