@@ -214,10 +214,15 @@ def move():
 		tnt=tnta[t]
 	if data['turn'] < 4:
 		tnt = "Good luck, my friends!"
-
+	
+	stng = ""
+	for i in mv:
+		stng += i
+		stng += " "
+	
 	return {
 		'move': direction,
-		'taunt': tnt
+		'taunt': stng
 	}
 
 # Expose WSGI app (so gunicorn can find it)
