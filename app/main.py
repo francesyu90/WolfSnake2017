@@ -14,7 +14,7 @@ def generateMap(data):
 		map[pellet[0]][pellet[1]] = "food"
 		
 	for snake in data["snakes"]:
-		for coord in snake["coords"]
+		for coord in snake["coords"]:
 			map[coord[0]][coord[1]] = "body"
 		map[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
 		map[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
@@ -53,13 +53,13 @@ def start():
 def move():
 	data = bottle.request.json
 	
-	#testing code
+	'''#testing code
 	d = ['up','down','left','right']
 	r = random.randint(0,3)
 	return {
 		'move': d[r],
 		'taunt': d[r]
-	}
+	}'''
 	
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
@@ -77,10 +77,11 @@ def move():
 	#  any empty space that has a head beside it with a smaller ize than our snake
 	
 	if(self["health_points"] > threshold):
-	#pick best remaining move
+		#pick best remaining move
+		pass
 		
 	else:
-	#move to closest food
+		#move to closest food
 		if not data["food"]:
 			return{
 				'move': mv[r],
