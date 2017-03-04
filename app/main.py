@@ -53,14 +53,14 @@ def start():
 def move():
 	data = bottle.request.json
 	
-'''	#testing code
+	'''	#testing code
 	d = ['up','down','left','right']
 	r = random.randint(0,3)
 	return {
 		'move': d[r],
 		'taunt': d[r]
 	}
-'''	
+	'''	
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
