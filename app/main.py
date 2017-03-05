@@ -224,7 +224,7 @@ def move():
 	#	'taunt': len(x)
 	#}
 	
-	mv = safe_dirsII(data, self)
+	#mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		
