@@ -6,7 +6,7 @@ gameMap=[[]]
 
 def dangerzone(snake, self):
 	c = snake["coords"][:-1]
-	if snake == self:
+	if snake["id"] == self["id"]:
 		return c
 	head = snake["coords"][0]
 	c += [[head[0]+1, head[1]]]
@@ -17,6 +17,7 @@ def dangerzone(snake, self):
 	
 def safe_dirsII(data, self):
 	safe = ['up', 'down', 'left', 'right']
+	return safe
 	up = [self["coords"][0][0], self["coords"][0][1]-1]
 	down = [self["coords"][0][0], self["coords"][0][1]+1]
 	left = [self["coords"][0][0]-1, self["coords"][0][1]]
@@ -31,15 +32,15 @@ def safe_dirsII(data, self):
 		safe.remove('right')
 	for snake in data["snakes"]:
 		if up in dangerzone(snake, self) and 'up' in safe:
-				safe.remove('up')
+			safe.remove('up')
 		if down in dangerzone(snake, self) and 'down' in safe:
-				safe.remove('down')
+			safe.remove('down')
 		if left in dangerzone(snake, self) and 'left' in safe:
-				safe.remove('left')
+			safe.remove('left')
 		if right in dangerzone(snake, self) and 'right' in safe:
-				safe.remove('right')
-	return safe
-				
+			safe.remove('right')
+	#return safe
+		
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
 	vd1=pellet[1]-snake["coords"][0][1]
@@ -119,9 +120,9 @@ def removeBadDirections(ourSnake):
 def generategameMap(data):
 	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
-	gameMap = [[]]*data["height"]
+	gameMap = [[]]*data["width"]
 	for row in range(len(gameMap)):
-		gameMap[row] = [""]*data["width"]
+		gameMap[row] = [""]*data["height"]
 		
 	for pellet in data["food"]:
 		gameMap[pellet[0]][pellet[1]] = "food"
@@ -183,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!",
+		'taunt': "Good luck, nds!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -195,7 +196,7 @@ def start():
 @bottle.post('/move')
 def move():
 	data = bottle.request.json
-	'''
+	
 	#testing code
 	d = ['up','down','left','right']
 	r = random.randint(0,3)
@@ -203,7 +204,7 @@ def move():
 		'move': d[r],
 		'taunt': d[r]
 	}
-	'''
+	
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
@@ -229,7 +230,7 @@ def move():
 	
 	return {
 		'move': mv[0],
-		'taunt': tnt
+		'taunt': stng
 	}
 	'''
 	mv = safe_dirsII(data, self)
