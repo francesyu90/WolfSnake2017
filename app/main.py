@@ -39,9 +39,8 @@ def chooseFood(data, self):
 def gameMapValue(xCord,yCord):
 	width = len(gameMap[0])
 	height = len(gameMap)
-	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
+	if xCord < 0 or yCord < 0 or yCord >= width or xCord >= height:
 		return "invalid"
-	return "invalid"
 	return gameMap[xCord][yCord]
 
 
@@ -216,7 +215,7 @@ def move():
 	generategameMap(data)
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
-	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+#	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
 	stng = ""
 	for i in mv:
@@ -225,7 +224,7 @@ def move():
 	
 	return {
 		'move': mv[2],
-		'taunt': "AHHH"
+		'taunt': stng
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
