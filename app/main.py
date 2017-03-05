@@ -117,8 +117,7 @@ def gameMapValue(xCord,yCord):
 	return gameMap[xCord][yCord]
 
 def generategameMap(data):
-	pass
-	'''
+	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
 	gameMap = [[]]*data["height"]
 	for row in gameMap:
@@ -131,7 +130,7 @@ def generategameMap(data):
 		for coord in snake["coords"]:
 			gameMap[coord[0]][coord[1]] = "body"
 		# store the body of the snake
-		gameMap[snake["coords"][0][0]][snake["coords"][0][1]] = "head %d".format(len(snake["coords"]))
+		gameMap[snake["coords"][0][0]][snake["coords"][0][1]] = "head {0}".format(len(snake["coords"]))
 		gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail"
 		# mark a snake as dangerous
 		if gameMapValue(snake["coords"][0][0]+1,snake["coords"][0][1])=="food":
@@ -142,7 +141,7 @@ def generategameMap(data):
 			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
 		elif gameMapValue(snake["coords"][0][0],snake["coords"][0][1]-1)=="food":
 			gameMap[snake["coords"][-1][0]][snake["coords"][-1][1]] = "tail danger"
-	'''
+	
 def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
@@ -218,6 +217,15 @@ def move():
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
+	stng = ""
+	for i in mv:
+		stng += i
+		stng += " "
+	
+	return {
+		'move': mv[2],
+		'taunt': "AHHH"
+	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
