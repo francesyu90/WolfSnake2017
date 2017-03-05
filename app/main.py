@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!lkokopkopj",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -234,14 +234,12 @@ def move():
 	else:
 		#move to closest food
 		#find closest food
-		
-
 		direction = shortestPath(mv, chooseFood(data, self), self)
 		#end of hungry
 	
 	#set taunt
 	if data['turn']%4==0:
-		tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We'll all be dead eventually :)"],
+		tnta=[["This is so fun!"],["What a great day :)"],["All my fave snakes are here!"],["We'll all be dead eventually..."],
 			["I'm a loversnake, not a battlesnake <3"],["Battlesnakes? More like PARTYsnakes!"],["Thank you to the sponsors!"],
 			[":D"],["Everyone here is so clever..."],["Golly!"],["What pretty snakes we have here today!"],["I should have prepared for this ahead of time..."],
 			["Good job everybody!"]]
@@ -249,12 +247,7 @@ def move():
 		tnt=tnta[t]
 	if data['turn'] < 4:
 		tnt = "Good luck, my friends!"
-	
-	stng = ""
-	for i in mv:
-		stng += i
-		stng += " "
-	
+		
 	return {
 		'move': direction,
 		'taunt': tnt
