@@ -219,11 +219,23 @@ def move():
 	#	'taunt': len(x)
 	#}
 	
-	mv = safe_dirsII(data, self)
-	r=random.randint(0,len(mv))
+	dir = ['up','down','left','right']
+	last = self["coords"][1]
+	head = self["coords"][0]
+	if head[0] > last[0]:
+		dir = ['up','down','right']
+	elif head[0] < last[0]:
+		dir = ['up','down','left']
+	elif head[1] > last[1]:
+		dir = ['down','left','right']
+	elif head[1] < last[1]:
+		dir = ['up','left','right']
+	
+	
+	r=random.randint(0,len(dir))
 	return {
 		'move': d[r],
-		'taunt': d[r]
+		'taunt': "AHHH!"
 	}
 
 	#d = ['up','down','left','right']
