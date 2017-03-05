@@ -59,44 +59,18 @@ def removeBadDirections(ourSnake):
 		safeDirections.remove("right")
 	if (temp == "tail danger"):
 		riskDirections.add("right")
-	local = [gameMapValue(head[0]+2,head[1]),gameMapValue(head[0]+1,head[1]-1),gameMapValue(head[0]+1,head[1]+1)]
-	localHeads = [x for x in local if x[:4] == "head"]
-	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
-	if localDanger:
-		if "right" in safeDirections:
-			safeDirections.remove("right")
-		if not "right" in riskDirections:
-			riskDirections.add("right")
-			
 			
 	temp = gameMapValue(head[0]-1,head[1])
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("left")
 	if (temp == "tail danger"):
 		riskDirections.add("left")
-	local = [gameMapValue(head[0]-2,head[1]),gameMapValue(head[0]-1,head[1]-1),gameMapValue(head[0]-1,head[1]+1)]
-	localHeads = [x for x in local if x[:4] == "head"]
-	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
-	if localDanger:
-		if "left" in safeDirections:
-			safeDirections.remove("left")
-		if not "left" in riskDirections:
-			riskDirections.add("left")
-			
 		
 	temp = gameMapValue(head[0],head[1]-1)
 	if (temp == "invalid") or (temp == "body") or (temp[:4] == "head"):
 		safeDirections.remove("up")
 	if (temp == "tail danger"):
 		riskDirections.add("up")
-	local = [gameMapValue(head[0],head[1]-2),gameMapValue(head[0]-1,head[1]-1),gameMapValue(head[0]+1,head[1]-1)]
-	localHeads = [x for x in local if x[:4] == "head"]
-	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
-	if localDanger:
-		if "up" in safeDirections:
-			safeDirections.remove("up")
-		if not "up" in riskDirections:
-			riskDirections.add("up")
 			
 		
 	temp = gameMapValue(head[0],head[1]+1)
@@ -104,14 +78,6 @@ def removeBadDirections(ourSnake):
 		safeDirections.remove("down")
 	if (temp == "tail danger"):
 		riskDirections.add("down")
-	local = [gameMapValue(head[0],head[1]+2),gameMapValue(head[0]-1,head[1]+1),gameMapValue(head[0]+1,head[1]+1)]
-	localHeads = [x for x in local if x[:4] == "head"]
-	localDanger = [x for x in localHeads if int(x[5:]) >= len(ourSnake["coords"])]
-	if localDanger:
-		if "down" in safeDirections:
-			safeDirections.remove("down")
-		if not "down" in riskDirections:
-			riskDirections.add("down")
 			
 		
 	return [safeDirections,riskDirections]
@@ -183,7 +149,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!",
+		'taunt': "Good luck, my friadsends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -215,16 +181,16 @@ def move():
 	generategameMap(data)
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
-#	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
-	mv = ["up","down","left","right"]
+	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+#	mv = ["up","down","left","right"]
 	stng = "---"
 	for i in mv:
 		stng += i
 		stng += " "
 	
 	return {
-		'move': mv[2],
-		'taunt': "okay then"
+		'move': mv[0],
+		'taunt': stng
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
