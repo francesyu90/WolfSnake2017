@@ -16,7 +16,6 @@ def dangerzone(snake, self):
 	return c
 	
 def safe_dirsII(data, self):
-	return ['up', 'down', 'left', 'right']
 	safe = ['up', 'down', 'left', 'right']
 	up = [self["coords"][0][0], self["coords"][0][1]-1]
 	down = [self["coords"][0][0], self["coords"][0][1]+1]
