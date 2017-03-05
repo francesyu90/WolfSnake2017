@@ -39,7 +39,7 @@ def safe_dirsII(data, self):
 			safe.remove('left')
 		if right in dangerzone(snake, self) and 'right' in safe:
 			safe.remove('right')
-	#return safe
+	return safe
 		
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
@@ -186,7 +186,7 @@ def start():
 		'color': '#00FF00',
 		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
-		'name': 'Dead Snake',
+		'name': 'Nice Snake',
 		'head_type': 'pixel',
 		'tail_type': 'pixel',
 		'secondary_color': "#FF00FF"
