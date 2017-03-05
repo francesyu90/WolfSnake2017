@@ -6,7 +6,7 @@ gameMap=[[]]
 
 def dangerzone(snake, self):
 	c = snake["coords"][:-1]
-	if snake = self:
+	if snake == self:
 		return c
 	head = snake["coords"][0]
 	c += [[head[0]+1, head[1]]]
@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, ms!",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
