@@ -219,7 +219,13 @@ def move():
 	#	'taunt': len(x)
 	#}
 	
-	#mv = safe_dirsII(data, self)
+	mv = safe_dirsII(data, self)
+	r=random.randint(0,len(mv))
+	return {
+		'move': d[r],
+		'taunt': d[r]
+	}
+
 	#d = ['up','down','left','right']
 	#r = random.randint(0,3)
 	#return {
