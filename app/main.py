@@ -200,7 +200,7 @@ def move():
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	return{
 		'move': 'left',
-		'taunt': self["coords"][0][0]
+		'taunt': ''+self["coords"][0][0]
 	}
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
