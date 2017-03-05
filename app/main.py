@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!",
+		'taunt': "Good luck, nds!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -196,7 +196,7 @@ def start():
 @bottle.post('/move')
 def move():
 	data = bottle.request.json
-	'''
+	
 	#testing code
 	d = ['up','down','left','right']
 	r = random.randint(0,3)
@@ -204,7 +204,7 @@ def move():
 		'move': d[r],
 		'taunt': d[r]
 	}
-	'''
+	
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
