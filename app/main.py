@@ -4,6 +4,42 @@ import random
 
 gameMap=[[]]
 
+def dangerzone(snake, self):
+	c = snake["coords"][:-1]
+	if snake = self:
+		return c
+	head = snake["coords"][0]
+	c += [[head[0]+1, head[1]]]
+	c += [[head[0]-1, head[1]]]
+	c += [[head[0], head[1]+1]]
+	c += [[head[0], head[1]-1]]
+	return c
+	
+def safe_dirsII(data, self):
+	safe = ['up', 'down', 'left', 'right']
+	up = [self["coords"][0][0], self["coords"][0][1]-1]
+	down = [self["coords"][0][0], self["coords"][0][1]+1]
+	left = [self["coords"][0][0]-1, self["coords"][0][1]]
+	right = [self["coords"][0][0]+1, self["coords"][0][1]]
+	if up[1] < 0:
+		safe.remove('up')
+	if down[1] >= height:
+		safe.remove('down')
+	if left[0] < 0:
+		safe.remove('left')
+	if right[0] >= width:
+		safe.remove('right')
+	for snake in data["snakes"]:
+		if up in dangerzone(snake, self) and 'up' in safe:
+				safe.remove('up')
+		if down in dangerzone(snake, self) and 'down' in safe:
+				safe.remove('down')
+		if left in dangerzone(snake, self) and 'left' in safe:
+				safe.remove('left')
+		if right in dangerzone(snake, self) and 'right' in safe:
+				safe.remove('right')
+	return safe
+				
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
 	vd1=pellet[1]-snake["coords"][0][1]
@@ -33,8 +69,6 @@ def chooseFood(data, self):
 			closest_food=pellet
 			td0=td1
 	return closest_food
-
-
 
 def gameMapValue(xCord,yCord):
 	width = len(gameMap[0])
