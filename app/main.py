@@ -217,14 +217,14 @@ def move():
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
-	stng = "---"
-	for i in safeDirections:
+	stng = ""
+	for i in mv:
 		stng += i
 		stng += " "
 	
 	return {
-		'move': safeDirections[0],
-		'taunt': stng
+		'move': mv[2],
+		'taunt': safeDirections
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
