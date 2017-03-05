@@ -40,8 +40,6 @@ def move():
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
 	#threshold between avoidance strategy and seeking food
-	food_threshold = 50
-	
 	
 	dir = ['up','down','left','right']
 	last = self["coords"][1]
@@ -54,17 +52,7 @@ def move():
 		dir = ['down','left','right']
 	elif head[1] < last[1]:
 		dir = ['up','left','right']
-	if head[0] == 0:
-		pass
-	left = head.copy()
-	right=head.copy()
-	up=head.copy()
-	down=head.copy()
-	left[0]-=1
-	right[0]+=1
-	up[1]-=1
-	down[1]+=1
-	r=random.randint(0,len(dir))
+	r=random.randint(0,len(dir)-1)
 	return {
 		'move': dir[r],
 		'taunt': "AHHH!"
