@@ -217,7 +217,7 @@ def move():
 	#temporary, combine the two lists
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
-	stng = ""
+	stng = "---"
 	for i in safeDirections:
 		stng += i
 		stng += " "
