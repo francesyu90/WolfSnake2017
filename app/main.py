@@ -184,9 +184,9 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, sirs and ladies!",
+		'taunt': "Good luck, my friends!",
 		'head_url': head_url,
-		'name': 'Nice Snake',
+		'name': 'Dead Snake',
 		'head_type': 'pixel',
 		'tail_type': 'pixel',
 		'secondary_color': "#FF00FF"
@@ -220,32 +220,32 @@ def move():
 	#}
 	
 	#mv = safe_dirsII(data, self)
-	d = ['up','down','left','right']
-	r = random.randint(0,3)
-	return {
-		'move': d[r],
-		'taunt': d[r]
-	}
-	if(self["health_points"] > threshold or len(data["food"]) == 0):
+	#d = ['up','down','left','right']
+	#r = random.randint(0,3)
+	#return {
+	#	'move': d[r],
+	#	'taunt': d[r]
+	#}
+	if(self["health_points"] > food_threshold or len(data["food"]) == 0):
 		#move to tail
 		
 		#testing code
-		d = ['up','down','left','right']
-		r = random.randint(0,3)
-		return {
-			'move': d[r],
-			'taunt': d[r]
-		}
+		#d = ['up','down','left','right']
+		#r = random.randint(0,3)
+		#return {
+		#	'move': d[r],
+		#	'taunt': d[r]
+		#}
 		
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
-		d = ['up','down','left','right']
-		r = random.randint(0,3)
-		return {
-			'move': d[r],
-			'taunt': d[r]
-		}
+		#d = ['up','down','left','right']
+		#r = random.randint(0,3)
+		#return {
+		#	'move': d[r],
+		#	'taunt': d[r]
+		#}
 		#move to closest food
 		#find closest food
 		direction = shortestPath(mv, chooseFood(data, self), self)
