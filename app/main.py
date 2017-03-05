@@ -36,6 +36,14 @@ def chooseFood(data, self):
 
 
 
+def gameMapValue(xCord,yCord):
+	width = len(gameMap[0])
+	height = len(gameMap)
+	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
+		return "invalid"
+	return "invalid"
+	return gameMap[xCord][yCord]
+
 
 def removeBadDirections(ourSnake):
 	safeDirections = ["up","down","left","right"]
@@ -109,19 +117,12 @@ def removeBadDirections(ourSnake):
 		
 	return [safeDirections,riskDirections]
 	
-def gameMapValue(xCord,yCord):
-	width = len(gameMap[0])
-	height = len(gameMap)
-	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
-		return "invalid"
-	return gameMap[xCord][yCord]
-
 def generategameMap(data):
 	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
 	gameMap = [[]]*data["height"]
-	for row in gameMap:
-		row = [""]*data["width"]
+	for row in range(len(gameMap)):
+		gameMap[row] = [""]*data["width"]
 		
 	for pellet in data["food"]:
 		gameMap[pellet[0]][pellet[1]] = "food"
@@ -213,9 +214,9 @@ def move():
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
 	generategameMap(data)
-#	safeDirections, riskDirections = removeBadDirections(self)
+	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
-#	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
 	stng = ""
 	for i in mv:
