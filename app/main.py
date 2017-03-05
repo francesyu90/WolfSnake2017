@@ -149,7 +149,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friadss!",
+		'taunt': "Good luck, my fs!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -177,7 +177,7 @@ def move():
 	food_threshold = 50
 	tnt = ""
 	if self:
-		tnt = self["health_points"]
+		tnt = "valid"
 	else:
 		tnt = "invalid"
 	
