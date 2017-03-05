@@ -218,12 +218,12 @@ def move():
 #	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
 	stng = ""
-	for i in mv:
+	for i in safeDirections:
 		stng += i
 		stng += " "
 	
 	return {
-		'move': mv[2],
+		'move': safeDirections[0],
 		'taunt': stng
 	}
 	
