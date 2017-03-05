@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!",
+		'taunt': "Good luck, my friends!!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -228,11 +228,22 @@ def move():
 	#}
 	if(self["health_points"] > food_threshold or len(data["food"]) == 0):
 		#move to tail
-		
+		d = ['up','down','left','right']
+		r = random.randint(0,3)
+		return {
+		'move': d[r],
+			'taunt': d[r]
+		}
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
 		#move to closest food
+		d = ['up','down','left','right']
+		r = random.randint(0,3)
+		return {
+		'move': d[r],
+			'taunt': d[r]
+		}
 		#find closest food
 		direction = shortestPath(mv, chooseFood(data, self), self)
 		#end of hungry
