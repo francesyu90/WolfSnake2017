@@ -209,20 +209,20 @@ def move():
 	'''
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
-	generategameMap(data)
-	x'''safeDirections, riskDirections''' = removeBadDirections(self)
+	#generategameMap(data)#safeDirections, riskDirections
+	#x = removeBadDirections(self)
 	#temporary, combine the two lists
-	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
-	mv = ["up","down","left","right"]
-	stng = "---"
-	for i in mv:
-		stng += i
-		stng += " "
+	#mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+	#mv = ["up","down","left","right"]
+	#stng = "---"
+	#for i in mv:
+	#	stng += i
+	#	stng += " "
 	
-	return {
-		'move': mv[0],
-		'taunt': len(x)
-	}
+	#return {
+	#	'move': mv[0],
+	#	'taunt': len(x)
+	#}
 	
 	mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or not data["food"]):
