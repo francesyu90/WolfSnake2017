@@ -85,9 +85,9 @@ def removeBadDirections(ourSnake):
 def generategameMap(data):
 	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
-	gameMap = [[]]*data["height"]
+	gameMap = [[]]*data["width"]
 	for row in range(len(gameMap)):
-		gameMap[row] = [""]*data["width"]
+		gameMap[row] = [""]*data["height"]
 		
 	for pellet in data["food"]:
 		gameMap[pellet[0]][pellet[1]] = "food"
@@ -149,7 +149,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, ms!",
+		'taunt': "Good lus!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -195,7 +195,7 @@ def move():
 	
 	return {
 		'move': mv[0],
-		'taunt': tnt
+		'taunt': stng
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
