@@ -36,6 +36,14 @@ def chooseFood(data, self):
 
 
 
+def gameMapValue(xCord,yCord):
+	width = len(gameMap[0])
+	height = len(gameMap)
+	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
+		return "invalid"
+	return "invalid"
+	return gameMap[xCord][yCord]
+
 
 def removeBadDirections(ourSnake):
 	safeDirections = ["up","down","left","right"]
@@ -109,13 +117,6 @@ def removeBadDirections(ourSnake):
 		
 	return [safeDirections,riskDirections]
 	
-def gameMapValue(xCord,yCord):
-	width = len(gameMap[0])
-	height = len(gameMap)
-	if xCord < 0 or yCord < 0 or xCord >= width or yCord >= height:
-		return "invalid"
-	return gameMap[xCord][yCord]
-
 def generategameMap(data):
 	
 	# might be nice to store the snake length in the head, and the local proximity to food in the tail
@@ -183,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!aah?",
+		'taunt': "Good luck, my friends!lkokopkopj",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -216,7 +217,7 @@ def move():
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
 	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
-	#mv = ["up","down","left","right"]
+	mv = ["up","down","left","right"]
 	stng = ""
 	for i in mv:
 		stng += i
