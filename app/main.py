@@ -93,7 +93,7 @@ def move():
 		r=0
 		mv=['right']
 	return {
-		'move': mv[r],
+		'move': 'left',
 		'taunt': "AHHH!"
 	}
 
