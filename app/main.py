@@ -181,8 +181,8 @@ def move():
 	generategameMap(data)
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
-	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
-#	mv = ["up","down","left","right"]
+#	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+	mv = ["up","down","left","right"]
 	stng = "---"
 	for i in mv:
 		stng += i
@@ -190,7 +190,7 @@ def move():
 	
 	return {
 		'move': mv[0],
-		'taunt': stng
+		'taunt': self
 	}
 	
 	if(self["health_points"] > threshold or not data["food"]):
