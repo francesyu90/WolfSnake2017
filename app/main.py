@@ -42,22 +42,6 @@ def move():
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
 	
-	#eliminate impossible directions & choose random default move
-	# step 1 - build game gameMap
-	#generategameMap(data)#safeDirections, riskDirections
-	#x = removeBadDirections(self)
-	#temporary, combine the two lists
-	#mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
-	#mv = ["up","down","left","right"]
-	#stng = "---"
-	#for i in mv:
-	#	stng += i
-	#	stng += " "
-	
-	#return {
-	#	'move': mv[0],
-	#	'taunt': len(x)
-	#}
 	
 	dir = ['up','down','left','right']
 	last = self["coords"][1]
@@ -74,7 +58,7 @@ def move():
 	
 	r=random.randint(0,len(dir))
 	return {
-		'move': d[r],
+		'move': dir[r],
 		'taunt': "AHHH!"
 	}
 
