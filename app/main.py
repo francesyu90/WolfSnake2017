@@ -17,12 +17,11 @@ def dangerzone(snake, self):
 	
 def safe_dirsII(data, self):
 	safe = ['up', 'down', 'left', 'right']
-	#return safe
+	return safe
 	up = [self["coords"][0][0], self["coords"][0][1]-1]
 	down = [self["coords"][0][0], self["coords"][0][1]+1]
 	left = [self["coords"][0][0]-1, self["coords"][0][1]]
 	right = [self["coords"][0][0]+1, self["coords"][0][1]]
-	'''
 	if up[1] < 0:
 		safe.remove('up')
 	if down[1] >= data['height']:
@@ -32,7 +31,6 @@ def safe_dirsII(data, self):
 	if right[0] >= data['width']:
 		safe.remove('right')
 	for snake in data["snakes"]:
-		
 		if up in dangerzone(snake, self) and 'up' in safe:
 			safe.remove('up')
 		if down in dangerzone(snake, self) and 'down' in safe:
@@ -41,7 +39,6 @@ def safe_dirsII(data, self):
 			safe.remove('left')
 		if right in dangerzone(snake, self) and 'right' in safe:
 			safe.remove('right')
-		'''
 	return safe
 		
 def calculateDistanceToFood(snake, pellet):
@@ -187,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!!",
+		'taunt': "Good luck, my friends!!!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
