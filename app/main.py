@@ -54,10 +54,10 @@ def move():
 		dir = ['down','left','right']
 	elif head[1] < last[1]:
 		dir = ['up','left','right']
-	left = head
-	right=head
-	up=head
-	down=head
+	left = head.copy()
+	right=head.copy()
+	up=head.copy()
+	down=head.copy()
 	left[0]-=1
 	right[0]+=1
 	up[1]-=1
