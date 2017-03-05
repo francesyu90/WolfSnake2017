@@ -89,6 +89,9 @@ def move():
 		mv += ['up']
 	
 	r=random.randint(0,len(mv))
+	if len(mv)==0:
+		r=0
+		mv=['right']
 	return {
 		'move': mv[r],
 		'taunt': "AHHH!"
