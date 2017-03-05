@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, sirs and ladies!",
+		'taunt': "Good luck, sirs and laddies!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -198,7 +198,7 @@ def move():
 	data = bottle.request.json
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
-
+	
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
 	'''tnt = ""
@@ -223,7 +223,7 @@ def move():
 	#	'move': mv[0],
 	#	'taunt': len(x)
 	#}
-		
+	
 	#mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or len(data["food"]) == 0):
 		#move to tail
