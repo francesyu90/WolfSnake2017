@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, s!",
+		'taunt': "Good luck, sirs!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -198,7 +198,10 @@ def move():
 	data = bottle.request.json
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
-	
+	return{
+		'move': 'left',
+		'taunt': self["coords"][0][0]
+	}
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
 	'''tnt = ""
