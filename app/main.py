@@ -149,7 +149,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my fs!",
+		'taunt': "Good luck, ms!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -177,16 +177,16 @@ def move():
 	food_threshold = 50
 	tnt = ""
 	if self:
-		tnt = self["id"]
+		tnt = "("+self["coords"][0][0]+","+self["coords"][0][1]+")"
 	else:
 		tnt = "invalid"
 	
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
-#	generategameMap(data)
-#	safeDirections, riskDirections = removeBadDirections(self)
+	generategameMap(data)
+	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
-#	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
+	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
 	mv = ["up","down","left","right"]
 	stng = "---"
 	for i in mv:
