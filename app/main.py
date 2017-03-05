@@ -183,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!aaaaaaa",
+		'taunt': "Good luck, my friends!aah?",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
