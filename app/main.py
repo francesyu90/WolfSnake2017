@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, sirs!",
+		'taunt': "Good luck, sirs and ladies!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -223,13 +223,7 @@ def move():
 	#	'move': mv[0],
 	#	'taunt': len(x)
 	#}
-	d = ['up','down','left','right']
-	r = random.randint(0,3)
-	return {
-		'move': d[r],
-		'taunt': d[r]
-	}
-	
+		
 	#mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or len(data["food"]) == 0):
 		#move to tail
@@ -245,6 +239,12 @@ def move():
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
+		d = ['up','down','left','right']
+		r = random.randint(0,3)
+		return {
+			'move': d[r],
+			'taunt': d[r]
+		}
 		#move to closest food
 		#find closest food
 		direction = shortestPath(mv, chooseFood(data, self), self)
