@@ -177,7 +177,7 @@ def move():
 	food_threshold = 50
 	tnt = ""
 	if self:
-		tnt = "valid"
+		tnt = self[0]
 	else:
 		tnt = "invalid"
 	
