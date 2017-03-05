@@ -23,11 +23,11 @@ def safe_dirsII(data, self):
 	right = [self["coords"][0][0]+1, self["coords"][0][1]]
 	if up[1] < 0:
 		safe.remove('up')
-	if down[1] >= height:
+	if down[1] >= data['height']:
 		safe.remove('down')
 	if left[0] < 0:
 		safe.remove('left')
-	if right[0] >= width:
+	if right[0] >= data['width']:
 		safe.remove('right')
 	for snake in data["snakes"]:
 		if up in dangerzone(snake, self) and 'up' in safe:
@@ -209,15 +209,15 @@ def move():
 	
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
-	tnt = ""
+	'''tnt = ""
 	if self:
 		tnt = "("+str(self["coords"][0][0])+","+str(self["coords"][0][1])+")"
 	else:
 		tnt = "invalid"
-	
+	'''
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
-	generategameMap(data)
+	'''generategameMap(data)
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
 	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
@@ -231,7 +231,8 @@ def move():
 		'move': mv[0],
 		'taunt': tnt
 	}
-	
+	'''
+	mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
