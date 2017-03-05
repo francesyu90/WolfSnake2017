@@ -184,7 +184,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, sirs and laddies!",
+		'taunt': "Good luck, sirs and ladies!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -201,12 +201,7 @@ def move():
 	
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
-	'''tnt = ""
-	if self:
-		tnt = "("+str(self["coords"][0][0])+","+str(self["coords"][0][1])+")"
-	else:
-		tnt = "invalid"
-	'''
+	
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
 	#generategameMap(data)#safeDirections, riskDirections
@@ -225,6 +220,12 @@ def move():
 	#}
 	
 	#mv = safe_dirsII(data, self)
+	d = ['up','down','left','right']
+	r = random.randint(0,3)
+	return {
+		'move': d[r],
+		'taunt': d[r]
+	}
 	if(self["health_points"] > threshold or len(data["food"]) == 0):
 		#move to tail
 		
