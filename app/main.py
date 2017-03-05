@@ -4,6 +4,42 @@ import random
 
 gameMap=[[]]
 
+def dangerzone(snake, self):
+	c = snake["coords"][:-1]
+	if snake["id"] == self["id"]:
+		return c
+	head = snake["coords"][0]
+	c += [[head[0]+1, head[1]]]
+	c += [[head[0]-1, head[1]]]
+	c += [[head[0], head[1]+1]]
+	c += [[head[0], head[1]-1]]
+	return c
+	
+def safe_dirsII(data, self):
+	safe = ['up', 'down', 'left', 'right']
+	up = [self["coords"][0][0], self["coords"][0][1]-1]
+	down = [self["coords"][0][0], self["coords"][0][1]+1]
+	left = [self["coords"][0][0]-1, self["coords"][0][1]]
+	right = [self["coords"][0][0]+1, self["coords"][0][1]]
+	if up[1] < 0:
+		safe.remove('up')
+	if down[1] >= data['height']:
+		safe.remove('down')
+	if left[0] < 0:
+		safe.remove('left')
+	if right[0] >= data['width']:
+		safe.remove('right')
+	for snake in data["snakes"]:
+		if up in dangerzone(snake, self) and 'up' in safe:
+			safe.remove('up')
+		if down in dangerzone(snake, self) and 'down' in safe:
+			safe.remove('down')
+		if left in dangerzone(snake, self) and 'left' in safe:
+			safe.remove('left')
+		if right in dangerzone(snake, self) and 'right' in safe:
+			safe.remove('right')
+	return safe
+				
 def calculateDistanceToFood(snake, pellet):
 	hd1=pellet[0]-snake["coords"][0][0]
 	vd1=pellet[1]-snake["coords"][0][1]
@@ -33,8 +69,6 @@ def chooseFood(data, self):
 			closest_food=pellet
 			td0=td1
 	return closest_food
-
-
 
 def gameMapValue(xCord,yCord):
 	width = len(gameMap[0])
@@ -149,7 +183,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good lus!",
+		'taunt': "Good luck, my friendmjkjjks!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -175,15 +209,15 @@ def move():
 	
 	#threshold between avoidance strategy and seeking food
 	food_threshold = 50
-	tnt = ""
+	'''tnt = ""
 	if self:
 		tnt = "("+str(self["coords"][0][0])+","+str(self["coords"][0][1])+")"
 	else:
 		tnt = "invalid"
-	
+	'''
 	#eliminate impossible directions & choose random default move
 	# step 1 - build game gameMap
-	generategameMap(data)
+	'''generategameMap(data)
 	safeDirections, riskDirections = removeBadDirections(self)
 	#temporary, combine the two lists
 	mv = safeDirections+[x for x in riskDirections if not x in safeDirections]
@@ -197,7 +231,8 @@ def move():
 		'move': mv[0],
 		'taunt': stng
 	}
-	
+	'''
+	mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
 		direction = shortestPath(mv, self["coords"][-1], self)
