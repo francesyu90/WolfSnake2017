@@ -17,7 +17,7 @@ def dangerzone(snake, self):
 	
 def safe_dirsII(data, self):
 	safe = ['up', 'down', 'left', 'right']
-	return safe
+	#return safe
 	up = [self["coords"][0][0], self["coords"][0][1]-1]
 	down = [self["coords"][0][0], self["coords"][0][1]+1]
 	left = [self["coords"][0][0]-1, self["coords"][0][1]]
@@ -147,7 +147,7 @@ def shortestPath(moves, goal, self):
 	#set default movement
 	r = random.randint(0,len(moves))
 	d = moves[r]
-	return d	#test
+	#return d	#test
 	#see if further horizontally or vertically
 	if(abs(goal[0]-self["coords"][0][0]) < abs(goal[1]-self["coords"][0][1])):
 		#move vertically
@@ -229,23 +229,9 @@ def move():
 	if(self["health_points"] > food_threshold or len(data["food"]) == 0):
 		#move to tail
 		
-		#testing code
-		#d = ['up','down','left','right']
-		#r = random.randint(0,3)
-		#return {
-		#	'move': d[r],
-		#	'taunt': d[r]
-		#}
-		
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
-		#d = ['up','down','left','right']
-		#r = random.randint(0,3)
-		#return {
-		#	'move': d[r],
-		#	'taunt': d[r]
-		#}
 		#move to closest food
 		#find closest food
 		direction = shortestPath(mv, chooseFood(data, self), self)
