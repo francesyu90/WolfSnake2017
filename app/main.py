@@ -24,7 +24,7 @@ def start():
 
 	return {
 		'color': '#00FF00',
-		'taunt': "Good luck, my friends!!!",
+		'taunt': "Good luck, my friends!!",
 		'head_url': head_url,
 		'name': 'Nice Snake',
 		'head_type': 'pixel',
@@ -52,6 +52,14 @@ def move():
 		dir = ['down','left','right']
 	elif head[1] < last[1]:
 		dir = ['up','left','right']
+	if head[0] == 0:
+		dir = [x for x in dir if not x=='left']
+	if head[0] == data['width']:
+		dir = [x for x in dir if not x=='right']
+	if head[1] == 0:
+		dir = [x for x in dir if not x=='up']
+	if head[1] == data['height']:
+		dir = [x for x in dir if not x=='down']
 	r=random.randint(0,len(dir)-1)
 	return {
 		'move': dir[r],
