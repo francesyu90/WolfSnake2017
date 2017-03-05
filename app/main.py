@@ -196,15 +196,6 @@ def start():
 @bottle.post('/move')
 def move():
 	data = bottle.request.json
-	'''
-	#testing code
-	d = ['up','down','left','right']
-	r = random.randint(0,3)
-	return {
-		'move': d[r],
-		'taunt': d[r]
-	}
-	'''
 	#find self
 	self = [s for s in data["snakes"] if s["id"] == data["you"]][0]
 	
@@ -236,6 +227,15 @@ def move():
 	mv = safe_dirsII(data, self)
 	if(self["health_points"] > threshold or not data["food"]):
 		#move to tail
+		
+		#testing code
+		d = ['up','down','left','right']
+		r = random.randint(0,3)
+		return {
+			'move': d[r],
+			'taunt': d[r]
+		}
+		
 		direction = shortestPath(mv, self["coords"][-1], self)
 		
 	else:
